@@ -1,30 +1,21 @@
 from functools import reduce
 
 def main():
-    with open('input.txt') as f:
+    inp_f = 'input.txt'
+    with open(inp_f) as f:
         lines = f.readlines()
 
-    arr = [line.strip() for line in lines]
+    # Pad input
+    arr = ['.'+line.strip()+'.' for line in lines]
+    pad_line = '.'*len(arr[0])
+    arr.insert(0, pad_line)
+    arr.append(pad_line)
     
     # Find each number in each line. Keep it around if you find a symbol nearby
     # What are the symbols?
-    digits = [str(x)for x in range(10)]
-    non_symbols = digits + ['.']
-    symbols = []
-    for it in arr:
-        for c in it:
-            if c not in non_symbols and c not in symbols:
-                symbols.append(c)
-    print(f'symbols: {symbols}')
-
+    digits = [str(x) for x in range(10)]
+    symbols = ['*', '@', '#', '$', '+', '%', '/', '&', '=', '-']
     stop_chars = symbols + ['.']
-
-    # Pad arr to make symbol search easier
-    line_len = len(arr[0])
-    pad_line = '.'*line_len
-    arr.insert(0, pad_line)
-    arr.append(pad_line)
-    arr = ['.'+line+'.' for line in arr]
 
     part_sum = 0
     gear_map = {}
@@ -32,7 +23,7 @@ def main():
     for r in range(1, len(arr)-1):
         curr_num = 0
         num_range = [0,0]
-        for c in range(line_len + 2):
+        for c in range(len(arr[r])):
             e = arr[r][c]
             if e in digits:
                 if curr_num == 0:
@@ -75,6 +66,9 @@ def main():
             
     print(f'Part 1: {part_sum}')
     print(f'Part 2: {gear_ratio_sum}')
+
+    assert part_sum == 539590
+    assert gear_ratio_sum == 80703636
 
 
 
