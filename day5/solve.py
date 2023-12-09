@@ -1,5 +1,3 @@
-from tqdm import tqdm
-
 def src_to_dst(src, mappings):
     # Perform mappping and return dst
     # mapping: [(dst_start, src_start, range_len), ...]

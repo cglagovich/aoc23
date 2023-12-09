@@ -1,6 +1,3 @@
-from re import A
-
-
 def num_wins(t, d):
         # there are two (t_early * t-t_early), (t_late * t-t_late) which both equal d
     max_t = int(d**.5)
